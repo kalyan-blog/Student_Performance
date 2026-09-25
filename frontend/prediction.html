@@ -75,133 +75,237 @@
 
             <!-- Main Interactive Section: Form & Live Result -->
             <div class="row g-4">
-                <!-- Prediction Form Column -->
+                <!-- Student Selection & Academic Profile Column -->
                 <div class="col-xl-5 col-lg-6">
-                    <div class="surface-card">
+                    <!-- SECTION 1: SELECT STUDENT -->
+                    <div class="surface-card mb-4">
                         <div class="d-flex align-items-center justify-content-between mb-3 pb-2 border-bottom">
                             <div>
-                                <h6 class="mb-1"><i class="fas fa-sliders me-2 text-primary"></i>Student Academic Profile</h6>
-                                <p class="text-muted small mb-0">Enter real student metrics for predictive assessment</p>
+                                <h6 class="mb-1"><i class="fas fa-user-check text-primary me-2"></i>Select Student</h6>
+                                <p class="text-muted small mb-0">Search, filter, and select from enrolled students database</p>
                             </div>
-                            <span class="badge bg-primary-subtle text-primary border" id="activeModelTag">Model: Best Fit</span>
+                            <span class="badge bg-primary-subtle text-primary border" id="studentCountBadge">Loading...</span>
                         </div>
 
-                        <form id="predictionForm" novalidate>
-                            <!-- Section 1: Student Information -->
-                            <div class="mb-3">
-                                <span class="nav-section-title px-0 d-block mb-2">1. Student Identification</span>
+                        <!-- Search Bar -->
+                        <div class="mb-3">
+                            <label class="form-label small fw-semibold text-secondary mb-1">Search by Name or ID</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-white"><i class="fas fa-search text-muted"></i></span>
+                                <input type="text" class="form-control" id="studentSearchInput" placeholder="Type student name or ID (e.g. S001, Aarav)..." autocomplete="off" oninput="onStudentSearchInput()">
+                                <button class="btn btn-outline-secondary" type="button" id="btnClearSearch" onclick="clearSearch()" title="Clear Search"><i class="fas fa-times"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Department & Semester Filters -->
+                        <div class="row g-2 mb-3">
+                            <div class="col-sm-7">
+                                <label class="form-label small fw-semibold text-secondary mb-1">Department</label>
+                                <select class="form-select form-select-sm" id="filterDept" onchange="onFilterChange()">
+                                    <option value="all">All Departments</option>
+                                    <option value="Computer Science">Computer Science</option>
+                                    <option value="Information Technology">Information Technology</option>
+                                    <option value="Electronics">Electronics</option>
+                                    <option value="Mechanical">Mechanical</option>
+                                    <option value="Civil">Civil</option>
+                                    <option value="Electrical Engineering">Electrical Engineering</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-5">
+                                <label class="form-label small fw-semibold text-secondary mb-1">Semester</label>
+                                <select class="form-select form-select-sm" id="filterSem" onchange="onFilterChange()">
+                                    <option value="all">All Semesters</option>
+                                    <option value="1">Semester 1</option>
+                                    <option value="2">Semester 2</option>
+                                    <option value="3">Semester 3</option>
+                                    <option value="4">Semester 4</option>
+                                    <option value="5">Semester 5</option>
+                                    <option value="6">Semester 6</option>
+                                    <option value="7">Semester 7</option>
+                                    <option value="8">Semester 8</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Student Selector Dropdown -->
+                        <div class="mb-2">
+                            <label class="form-label small fw-semibold text-secondary mb-1">Select Student</label>
+                            <select class="form-select" id="studentSelect" onchange="onStudentSelect(this.value)">
+                                <option value="">-- Choose a student from database --</option>
+                            </select>
+                            <div id="studentLoadingSpinner" class="text-muted small mt-2 d-none">
+                                <span class="spinner-border spinner-border-sm me-1 text-primary"></span> Loading students from database...
+                            </div>
+                            <div id="noStudentsFoundAlert" class="alert alert-light border small text-muted mt-2 d-none py-2 px-3">
+                                <i class="fas fa-info-circle me-1 text-primary"></i> <span id="noStudentsMsg">No students found. Try changing the search or filters.</span>
+                                <a href="add-students.html" class="btn btn-xs btn-primary ms-2 py-0 px-2 d-none" id="btnAddStudentsLink">Add Students</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SECTION 2: STUDENT ACADEMIC PROFILE -->
+                    <div class="surface-card mb-4" id="academicProfileCard">
+                        <!-- Profile Card Header -->
+                        <div class="d-flex align-items-center justify-content-between mb-3 pb-2 border-bottom">
+                            <div>
+                                <h6 class="mb-1"><i class="fas fa-id-card text-primary me-2"></i>Student Academic Profile</h6>
+                                <div class="text-muted small" id="profileLoadedStatus">
+                                    <span class="text-secondary"><i class="fas fa-hand-pointer me-1"></i>Select a student above to inspect metrics</span>
+                                </div>
+                            </div>
+                            <div id="profileActionBtns" class="d-none">
+                                <button type="button" class="btn btn-sm btn-outline-primary" id="btnToggleEdit" onclick="toggleEditMode()">
+                                    <i class="fas fa-pen-to-square me-1"></i> Edit Data
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Empty Placeholder when no student selected -->
+                        <div id="noStudentSelectedPlaceholder" class="text-center py-4 text-muted">
+                            <div class="stat-icon icon-blue mx-auto mb-2" style="width: 44px; height: 44px; font-size: 18px; opacity: 0.7;">
+                                <i class="fas fa-user-graduate"></i>
+                            </div>
+                            <p class="small mb-2">No student selected yet.</p>
+                            <span class="badge bg-light text-secondary border">Use the search &amp; filters above to select a student</span>
+                        </div>
+
+                        <!-- Active Student Details (Shown once student selected) -->
+                        <div id="selectedStudentContent" class="d-none">
+                            <!-- Student Meta Header -->
+                            <div class="p-3 mb-3 bg-light rounded border">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div>
+                                        <h5 class="fw-bold mb-0 text-dark" id="profStudentName">Student Name</h5>
+                                        <div class="text-secondary small mt-1">
+                                            <span class="badge bg-white text-dark border me-2" id="profStudentId">ID: S000</span>
+                                            <span id="profStudentDeptSem">Department &bull; Sem 1</span>
+                                        </div>
+                                    </div>
+                                    <div class="text-end">
+                                        <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1 small">
+                                            <i class="fas fa-check-circle me-1"></i> Loaded from DB
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Read-Only Metrics Grid -->
+                            <div id="readOnlyMetricsGrid" class="row g-2 mb-3">
+                                <!-- Attendance -->
+                                <div class="col-sm-6">
+                                    <div class="p-3 bg-white border rounded shadow-xs h-100">
+                                        <div class="d-flex justify-content-between align-items-center mb-1">
+                                            <span class="small fw-semibold text-secondary"><i class="fas fa-calendar-check text-primary me-1"></i> Attendance</span>
+                                            <span class="badge bg-light text-secondary border" style="font-size:10px;">Target &ge; 75%</span>
+                                        </div>
+                                        <div class="fs-4 fw-bold text-dark" id="dispAttendance">0.0%</div>
+                                        <div class="progress mt-2" style="height: 6px;">
+                                            <div class="progress-bar" id="barAttendance" style="width: 0%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Internal Marks -->
+                                <div class="col-sm-6">
+                                    <div class="p-3 bg-white border rounded shadow-xs h-100">
+                                        <div class="d-flex justify-content-between align-items-center mb-1">
+                                            <span class="small fw-semibold text-secondary"><i class="fas fa-file-pen text-primary me-1"></i> Internal Marks</span>
+                                            <span class="badge bg-light text-secondary border" style="font-size:10px;">Target &ge; 60</span>
+                                        </div>
+                                        <div class="fs-4 fw-bold text-dark" id="dispInternal">0.0 / 100</div>
+                                        <div class="progress mt-2" style="height: 6px;">
+                                            <div class="progress-bar" id="barInternal" style="width: 0%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Assignment Completion -->
+                                <div class="col-sm-6">
+                                    <div class="p-3 bg-white border rounded shadow-xs h-100">
+                                        <div class="d-flex justify-content-between align-items-center mb-1">
+                                            <span class="small fw-semibold text-secondary"><i class="fas fa-tasks text-primary me-1"></i> Assignments</span>
+                                            <span class="badge bg-light text-secondary border" style="font-size:10px;">Target &ge; 70%</span>
+                                        </div>
+                                        <div class="fs-4 fw-bold text-dark" id="dispAssignment">0.0%</div>
+                                        <div class="progress mt-2" style="height: 6px;">
+                                            <div class="progress-bar" id="barAssignment" style="width: 0%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Previous Semester -->
+                                <div class="col-sm-6">
+                                    <div class="p-3 bg-white border rounded shadow-xs h-100">
+                                        <div class="d-flex justify-content-between align-items-center mb-1">
+                                            <span class="small fw-semibold text-secondary"><i class="fas fa-graduation-cap text-primary me-1"></i> Previous Sem</span>
+                                            <span class="badge bg-light text-secondary border" style="font-size:10px;">Target &ge; 60%</span>
+                                        </div>
+                                        <div class="fs-4 fw-bold text-dark" id="dispPrevious">0.0%</div>
+                                        <div class="progress mt-2" style="height: 6px;">
+                                            <div class="progress-bar" id="barPrevious" style="width: 0%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Study Hours -->
+                                <div class="col-12">
+                                    <div class="p-3 bg-white border rounded shadow-xs">
+                                        <div class="d-flex justify-content-between align-items-center mb-1">
+                                            <span class="small fw-semibold text-secondary"><i class="fas fa-clock text-primary me-1"></i> Weekly Study Hours</span>
+                                            <span class="badge bg-light text-secondary border" style="font-size:10px;">Target &ge; 10 hrs/wk</span>
+                                        </div>
+                                        <div class="fs-4 fw-bold text-dark" id="dispStudy">0.0 hrs/week</div>
+                                        <div class="progress mt-2" style="height: 6px;">
+                                            <div class="progress-bar" id="barStudy" style="width: 0%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Edit Mode Input Form (Hidden by default, enabled when faculty clicks Edit Data) -->
+                            <form id="editStudentForm" class="d-none p-3 mb-3 border rounded bg-light" onsubmit="event.preventDefault(); saveStudentChanges();">
+                                <div class="fw-semibold small text-primary mb-2"><i class="fas fa-pen-to-square me-1"></i>Edit Academic Metrics in Database</div>
                                 <div class="row g-2">
                                     <div class="col-sm-6">
-                                        <label class="form-label" for="predStudentId">Student ID <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="predStudentId" placeholder="e.g. S042" required>
+                                        <label class="form-label small fw-semibold">Attendance (%)</label>
+                                        <input type="number" step="0.1" min="0" max="100" class="form-control form-control-sm" id="editAttendance" required>
                                     </div>
                                     <div class="col-sm-6">
-                                        <label class="form-label" for="predStudentName">Student Full Name <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="predStudentName" placeholder="e.g. Sarah Jenkins" required>
+                                        <label class="form-label small fw-semibold">Internal Marks (/100)</label>
+                                        <input type="number" step="0.1" min="0" max="100" class="form-control form-control-sm" id="editInternal" required>
                                     </div>
-                                    <div class="col-sm-7">
-                                        <label class="form-label" for="predDept">Department</label>
-                                        <select class="form-select" id="predDept">
-                                            <option>Computer Science</option>
-                                            <option>Information Technology</option>
-                                            <option>Electronics</option>
-                                            <option>Mechanical</option>
-                                            <option>Civil</option>
-                                            <option>Electrical Engineering</option>
-                                        </select>
+                                    <div class="col-sm-6">
+                                        <label class="form-label small fw-semibold">Assignments (%)</label>
+                                        <input type="number" step="0.1" min="0" max="100" class="form-control form-control-sm" id="editAssignment" required>
                                     </div>
-                                    <div class="col-sm-5">
-                                        <label class="form-label" for="predSem">Semester</label>
-                                        <select class="form-select" id="predSem">
-                                            <option value="1">Sem 1</option>
-                                            <option value="2">Sem 2</option>
-                                            <option value="3">Sem 3</option>
-                                            <option value="4" selected>Sem 4</option>
-                                            <option value="5">Sem 5</option>
-                                            <option value="6">Sem 6</option>
-                                            <option value="7">Sem 7</option>
-                                            <option value="8">Sem 8</option>
-                                        </select>
+                                    <div class="col-sm-6">
+                                        <label class="form-label small fw-semibold">Previous Sem (%)</label>
+                                        <input type="number" step="0.1" min="0" max="100" class="form-control form-control-sm" id="editPrevious" required>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label small fw-semibold">Study Hours / Week</label>
+                                        <input type="number" step="0.5" min="0" max="84" class="form-control form-control-sm" id="editStudy" required>
                                     </div>
                                 </div>
-                            </div>
-
-                            <!-- Section 2: Core Academic Parameters -->
-                            <div class="mb-3">
-                                <span class="nav-section-title px-0 d-block mb-2">2. Continuous Academic Parameters</span>
-                                <div class="row g-3">
-                                    <div class="col-sm-6">
-                                        <label class="form-label" for="predAttendance">
-                                            Attendance Percentage
-                                            <span class="text-muted fw-normal small">(Target: &ge; 75%)</span>
-                                        </label>
-                                        <div class="input-group">
-                                            <input type="number" class="form-control" id="predAttendance" min="0" max="100" step="0.1" value="78.5" placeholder="0-100" required>
-                                            <span class="input-group-text">%</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label class="form-label" for="predInternal">
-                                            Internal Marks
-                                            <span class="text-muted fw-normal small">(Target: &ge; 60)</span>
-                                        </label>
-                                        <div class="input-group">
-                                            <input type="number" class="form-control" id="predInternal" min="0" max="100" step="0.1" value="72.0" placeholder="0-100" required>
-                                            <span class="input-group-text">/ 100</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label class="form-label" for="predAssign">
-                                            Assignment Completion
-                                            <span class="text-muted fw-normal small">(Target: &ge; 70%)</span>
-                                        </label>
-                                        <div class="input-group">
-                                            <input type="number" class="form-control" id="predAssign" min="0" max="100" step="0.1" value="82.0" placeholder="0-100" required>
-                                            <span class="input-group-text">%</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label class="form-label" for="predPrevious">
-                                            Previous Semester / GPA
-                                            <span class="text-muted fw-normal small">(Target: &ge; 60%)</span>
-                                        </label>
-                                        <div class="input-group">
-                                            <input type="number" class="form-control" id="predPrevious" min="0" max="100" step="0.1" value="74.5" placeholder="0-100" required>
-                                            <span class="input-group-text">%</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label class="form-label" for="predStudy">
-                                            Study Hours / Week
-                                            <span class="text-muted fw-normal small">(Target: &ge; 10 hrs)</span>
-                                        </label>
-                                        <div class="input-group">
-                                            <input type="number" class="form-control" id="predStudy" min="0" max="80" step="0.5" value="12.0" placeholder="e.g. 14" required>
-                                            <span class="input-group-text">hrs/wk</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label class="form-label" for="predAlgo">Predictive Model</label>
-                                        <select class="form-select" id="predAlgo">
-                                            <option value="Random Forest Regressor">Random Forest (Ensemble)</option>
-                                            <option value="Linear Regression">Linear Regression (Baseline)</option>
-                                        </select>
-                                    </div>
+                                <div class="d-flex justify-content-end gap-2 mt-3 pt-2 border-top">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary px-3" onclick="cancelEditMode()">Cancel</button>
+                                    <button type="submit" class="btn btn-sm btn-success px-3 fw-semibold" id="btnSaveStudentChanges">
+                                        <i class="fas fa-check me-1"></i> Save Changes
+                                    </button>
                                 </div>
-                            </div>
+                            </form>
 
-                            <!-- Preset Profiles for Instant Demo Testing -->
-                            <div class="p-2 mb-3 bg-light rounded border d-flex gap-2 align-items-center flex-wrap">
-                                <small class="fw-semibold text-secondary me-1"><i class="fas fa-wand-magic me-1"></i>Load Test Scenario:</small>
-                                <button type="button" class="btn btn-xs btn-outline-danger py-1 px-2" style="font-size:11px;" onclick="loadPreset('high_risk')">High Risk Student</button>
-                                <button type="button" class="btn btn-xs btn-outline-warning py-1 px-2" style="font-size:11px;" onclick="loadPreset('moderate_risk')">Moderate Risk Student</button>
-                                <button type="button" class="btn btn-xs btn-outline-success py-1 px-2" style="font-size:11px;" onclick="loadPreset('low_risk')">Low Risk (Honor)</button>
-                            </div>
+                            <!-- Inference Model Selector & Predict Button -->
+                            <div class="pt-2 border-top">
+                                <div class="mb-3">
+                                    <label class="form-label small fw-semibold text-secondary mb-1">Machine Learning Algorithm</label>
+                                    <select class="form-select form-select-sm" id="predAlgo">
+                                        <option value="Random Forest Regressor" selected>Random Forest Regressor (Ensemble Fit, R² ≈ 0.91)</option>
+                                        <option value="Linear Regression">Linear Regression (Baseline, R² ≈ 0.93)</option>
+                                    </select>
+                                </div>
 
-                            <button type="submit" class="btn btn-primary w-100 py-2 fs-6 shadow-sm" id="btnPredict">
-                                <i class="fas fa-bolt me-2"></i> Predict Performance & Detect Risks
-                            </button>
-                        </form>
+                                <button type="button" class="btn btn-primary w-100 py-2 fs-6 shadow-sm fw-semibold" id="btnPredict" onclick="runPredictionForSelectedStudent()">
+                                    <i class="fas fa-bolt me-2"></i> Predict Performance
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -231,7 +335,7 @@
                             <div class="hero-score-value">
                                 <span id="resScore">72.4</span> <span>/ 100</span>
                             </div>
-                            <div class="hero-meta-pills">
+                            <div class="hero-meta-pills" id="resMetaPills">
                                 <span class="perf-badge" id="resPerfBadge">Good Performance</span>
                                 <span class="risk-badge" id="resRiskBadge"><i class="fas fa-exclamation-triangle"></i> Moderate Risk</span>
                                 <span class="grade-badge" id="resGradeBadge">Grade B+</span>

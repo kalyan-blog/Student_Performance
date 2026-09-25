@@ -12,10 +12,33 @@ def get_students():
     try:
         page = request.args.get("page", 1, type=int)
         per_page = request.args.get("per_page", 20, type=int)
+        if per_page > 500:
+            per_page = 500
         search = request.args.get("search", "").strip()
-        result = _search("students", search, ["name", "student_id", "department"], page=page, per_page=per_page)
+        dept = request.args.get("department", "").strip()
+        sem = request.args.get("semester", "").strip()
+
+        filters = {}
+        if dept and dept.lower() not in ["all", "all departments"]:
+            filters["department"] = dept
+        if sem and sem.lower() not in ["all", "all semesters"]:
+            try:
+                filters["semester"] = int(sem)
+            except ValueError:
+                pass
+
+        result = _search("students", search, ["name", "student_id", "department"], page=page, per_page=per_page, filters=filters)
+        
+        students_list = []
+        for r in result.data:
+            s = dict(r)
+            s["student_name"] = s.get("name", "")
+            s["assignment_completion"] = s.get("assignment_score", 0.0)
+            s["previous_semester_performance"] = s.get("previous_marks", 0.0)
+            students_list.append(s)
+
         return jsonify({
-            "students": result.data,
+            "students": students_list,
             "total": result.count,
             "page": page,
             "per_page": per_page,
@@ -23,6 +46,7 @@ def get_students():
         }), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
 
 
 @students_bp.route("/at-risk", methods=["GET"])
@@ -139,6 +163,9 @@ def get_student(student_id):
             return jsonify({"error": "Student not found"}), 404
 
         student = dict(result.data[0])
+        student["student_name"] = student.get("name", "")
+        student["assignment_completion"] = student.get("assignment_score", 0.0)
+        student["previous_semester_performance"] = student.get("previous_marks", 0.0)
 
         # Fetch predictions for this student
         preds = _find("predictions", "student_id", student_id)
@@ -158,12 +185,27 @@ def get_student(student_id):
         latest = parsed_preds[0] if parsed_preds else None
 
         return jsonify({
+            "student_id": student.get("student_id"),
+            "student_name": student.get("name"),
+            "name": student.get("name"),
+            "department": student.get("department"),
+            "semester": student.get("semester"),
+            "attendance": student.get("attendance"),
+            "internal_marks": student.get("internal_marks"),
+            "assignment_completion": student.get("assignment_score"),
+            "assignment_score": student.get("assignment_score"),
+            "previous_semester_performance": student.get("previous_marks"),
+            "previous_marks": student.get("previous_marks"),
+            "study_hours": student.get("study_hours"),
+            "age": student.get("age", 20),
+            "gender": student.get("gender", "Other"),
             "student": student,
             "latest_prediction": latest,
             "prediction_history": parsed_preds
         }), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
 
 
 @students_bp.route("", methods=["POST"])
@@ -503,7 +545,16 @@ def confirm_import():
 @login_required
 def update_student(student_id):
     try:
-        data = request.get_json()
+        data = request.get_json() or {}
+
+        # Map alias keys
+        if "student_name" in data and "name" not in data:
+            data["name"] = data["student_name"]
+        if "assignment_completion" in data and "assignment_score" not in data:
+            data["assignment_score"] = data["assignment_completion"]
+        if "previous_semester_performance" in data and "previous_marks" not in data:
+            data["previous_marks"] = data["previous_semester_performance"]
+
         update_data = {}
         fields = [
             "name", "department", "semester", "age", "gender",
@@ -511,21 +562,53 @@ def update_student(student_id):
             "internal_marks", "previous_marks"
         ]
         for field in fields:
-            if field in data:
+            if field in data and data[field] is not None:
                 val = data[field]
                 if field in ["semester", "age"]:
                     val = int(val)
                 elif field in ["attendance", "study_hours", "assignment_score", "internal_marks", "previous_marks"]:
                     val = float(val)
+                    if field in ["attendance", "assignment_score", "internal_marks"]:
+                        if val < 0 or val > 100:
+                            return jsonify({"error": f"{field.replace('_', ' ').title()} must be between 0 and 100."}), 400
+                    elif field == "study_hours" and val < 0:
+                        return jsonify({"error": "Study hours must be non-negative."}), 400
+                    elif field == "previous_marks":
+                        if val < 0:
+                            return jsonify({"error": "Previous semester performance cannot be negative."}), 400
+                        elif val <= 10.0 and val > 0:
+                            val = min(100.0, round(val * 10.0, 1))
+                        elif val > 100:
+                            return jsonify({"error": "Previous semester performance cannot exceed 100."}), 400
                 update_data[field] = val
 
         if not update_data:
             return jsonify({"error": "No fields to update"}), 400
 
+        existing = _find("students", "student_id", student_id)
+        if not existing.data:
+            return jsonify({"error": "Student not found"}), 404
+
         _update("students", "student_id", student_id, update_data)
-        return jsonify({"message": "Student updated successfully"}), 200
+
+        # Sync to Supabase in background
+        from database.db import sync_to_supabase
+        sync_to_supabase("students", {**update_data, "student_id": student_id})
+
+        updated_rec = _find("students", "student_id", student_id)
+        updated_student = dict(updated_rec.data[0]) if updated_rec.data else update_data
+        updated_student["student_name"] = updated_student.get("name", "")
+        updated_student["assignment_completion"] = updated_student.get("assignment_score", 0.0)
+        updated_student["previous_semester_performance"] = updated_student.get("previous_marks", 0.0)
+
+        return jsonify({
+            "success": True,
+            "message": "Student updated successfully",
+            "student": updated_student
+        }), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
 
 
 @students_bp.route("/<student_id>", methods=["DELETE"])
