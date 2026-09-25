@@ -1,4 +1,4 @@
-const API_URL = window.location.origin;
+const API_URL = window.API_URL || (window.__ENV__ && window.__ENV__.API_URL) || window.location.origin;
 let currentPage = 1;
 let charts = {};
 
@@ -121,8 +121,8 @@ async function checkDatabaseHealth() {
             if (dot) dot.style.background = '#dc2626';
         }
     } catch {
-        if (label) label.innerHTML = `Database: <strong class="text-success">Connected</strong>`;
-        if (dot) dot.style.background = '#16a34a';
+        if (label) label.innerHTML = `Database: <strong class="text-danger">Disconnected</strong>`;
+        if (dot) dot.style.background = '#dc2626';
     }
 }
 

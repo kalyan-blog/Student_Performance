@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "public": true,
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/", "destination": "/frontend/index.html" },
+    { "source": "/login", "destination": "/frontend/login.html" },
+    { "source": "/dashboard", "destination": "/frontend/dashboard.html" },
+    { "source": "/students", "destination": "/frontend/students.html" },
+    { "source": "/prediction", "destination": "/frontend/prediction.html" },
+    { "source": "/at-risk", "destination": "/frontend/at-risk.html" },
+    { "source": "/analytics", "destination": "/frontend/analytics.html" },
+    { "source": "/reports", "destination": "/frontend/reports.html" },
+    { "source": "/add-students", "destination": "/frontend/add-students.html" },
+    { "source": "/css/(.*)", "destination": "/frontend/css/$1" },
+    { "source": "/js/(.*)", "destination": "/frontend/js/$1" },
+    { "source": "/(.*)", "destination": "/frontend/$1" }
+  ]
+}

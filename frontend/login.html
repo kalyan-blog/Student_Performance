@@ -817,19 +817,20 @@
     async function checkHealth() {
         const pillText = document.getElementById('dbStatusText');
         const dot = document.getElementById('dbDot');
+        if (!pillText && !dot) return;
         try {
             const res = await fetch(`${API_BASE}/api/health`);
             const data = await res.json();
             if (res.ok && data.database === 'connected') {
-                pillText.textContent = 'Database: Connected';
-                dot.style.background = '#16A34A';
+                if (pillText) pillText.textContent = 'Database: Connected';
+                if (dot) dot.style.background = '#16A34A';
             } else {
-                pillText.textContent = 'Database: Disconnected';
-                dot.style.background = '#DC2626';
+                if (pillText) pillText.textContent = 'Database: Disconnected';
+                if (dot) dot.style.background = '#DC2626';
             }
         } catch (e) {
-            pillText.textContent = 'Database: Connected (Local)';
-            dot.style.background = '#16A34A';
+            if (pillText) pillText.textContent = 'Database: Disconnected';
+            if (dot) dot.style.background = '#DC2626';
         }
     }
     checkHealth();

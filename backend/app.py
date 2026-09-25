@@ -19,7 +19,22 @@ app.config["SESSION_FILE_DIR"] = os.path.join(os.path.dirname(__file__), "..", "
 
 os.makedirs(app.config["SESSION_FILE_DIR"], exist_ok=True)
 
-CORS(app, supports_credentials=True)
+frontend_env = os.getenv("FRONTEND_URL", "")
+allowed_origins = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://localhost:5000",
+    "http://127.0.0.1:5000",
+    "http://localhost:5500",
+    "http://127.0.0.1:5500",
+]
+if frontend_env:
+    for u in frontend_env.split(","):
+        u = u.strip()
+        if u and u not in allowed_origins:
+            allowed_origins.append(u)
+
+CORS(app, origins=allowed_origins, supports_credentials=True)
 Session(app)
 
 from routes.auth import auth_bp
