@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>At-Risk Students - EduPredict AI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+    <div class="dashboard-wrapper">
+        <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+        
+        <!-- Application Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <a href="dashboard.html" class="brand-badge">
+                    <div class="brand-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <div class="brand-text">
+                        <h3>EduPredict AI</h3>
+                        <small>Intelligent Risk Detection</small>
+                    </div>
+                </a>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section-title">Academic Analytics</div>
+                <a href="dashboard.html" class="nav-item"><i class="fas fa-chart-pie"></i> Dashboard</a>
+                <a href="students.html" class="nav-item"><i class="fas fa-users"></i> Students</a>
+                <a href="add-students.html" class="nav-item"><i class="fas fa-user-plus"></i> Add Students</a>
+                <a href="prediction.html" class="nav-item"><i class="fas fa-wand-magic-sparkles"></i> Predict Performance</a>
+                <a href="at-risk.html" class="nav-item active"><i class="fas fa-triangle-exclamation"></i> At-Risk Students <span class="badge bg-danger ms-auto" id="navAtRiskCount">0</span></a>
+                <a href="prediction.html#history-card" class="nav-item"><i class="fas fa-clock-rotate-left"></i> Prediction History</a>
+                <a href="analytics.html" class="nav-item"><i class="fas fa-chart-column"></i> Analytics</a>
+                <a href="reports.html" class="nav-item"><i class="fas fa-file-contract"></i> Reports & Export</a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="d-flex align-items-center gap-2">
+                    <div class="user-avatar" id="sidebarAvatar">U</div>
+                    <div class="overflow-hidden">
+                        <div class="fw-semibold text-truncate small" id="sidebarName">User</div>
+                        <div class="small text-muted" id="sidebarRole">Faculty</div>
+                    </div>
+                    <button class="btn btn-sm text-danger ms-auto" onclick="logout()" title="Sign Out"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <div class="topbar">
+                <div class="topbar-left">
+                    <button class="mobile-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+                    <div>
+                        <h4>At-Risk Student Intervention Cohort</h4>
+                        <div class="breadcrumb-sub">Early detection radar for students below institutional benchmark thresholds</div>
+                    </div>
+                </div>
+                <div class="topbar-right">
+                    <div class="d-none d-md-flex align-items-center gap-2 px-3 py-1 bg-white border rounded-pill shadow-xs" id="topbarDbStatus">
+                        <span id="dbIndicatorDot" style="width:8px; height:8px; border-radius:50%; background:#16A34A; display:inline-block;"></span>
+                        <span id="dbStatusLabel" class="small fw-semibold text-secondary">Database: <strong class="text-success">Connected</strong></span>
+                    </div>
+                    <button class="btn-icon" onclick="toggleTheme()" title="Toggle Light/Dark Theme"><i class="fas fa-moon" id="themeIcon"></i></button>
+                    <a href="prediction.html" class="btn btn-primary btn-sm"><i class="fas fa-plus me-1"></i> New Prediction</a>
+                    <div class="user-avatar" id="topbarAvatar">U</div>
+                </div>
+            </div>
+
+            <!-- Triage Summary Cards -->
+            <div class="row g-3 mb-4">
+                <div class="col-md-4">
+                    <div class="stat-card" style="border-left: 4px solid var(--danger);">
+                        <div class="stat-header">
+                            <span class="stat-label">Critical High Risk</span>
+                            <div class="stat-icon icon-red"><i class="fas fa-triangle-exclamation"></i></div>
+                        </div>
+                        <div class="stat-value text-danger" id="kpiHighRisk">0</div>
+                        <div class="stat-change text-muted">Predicted Score &lt; 50.0 (Immediate Intervention)</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-card" style="border-left: 4px solid var(--warning);">
+                        <div class="stat-header">
+                            <span class="stat-label">Moderate Risk</span>
+                            <div class="stat-icon icon-yellow"><i class="fas fa-exclamation-triangle"></i></div>
+                        </div>
+                        <div class="stat-value text-warning" id="kpiModerateRisk">0</div>
+                        <div class="stat-change text-muted">Predicted Score 50.0 - 74.99 (Early Warning)</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-card" style="border-left: 4px solid var(--primary);">
+                        <div class="stat-header">
+                            <span class="stat-label">Total Under Surveillance</span>
+                            <div class="stat-icon icon-blue"><i class="fas fa-users-viewfinder"></i></div>
+                        </div>
+                        <div class="stat-value text-primary" id="kpiTotalAtRisk">0</div>
+                        <div class="stat-change text-muted">Enrolled in Faculty Remedial Radar</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- At-Risk Students Table Container -->
+            <div class="table-container">
+                <div class="table-header">
+                    <div>
+                        <h5 class="mb-1"><i class="fas fa-filter text-primary me-2"></i>Active Academic Risk Surveillance</h5>
+                        <small class="text-muted">Filter by risk band, department, or search by student credentials</small>
+                    </div>
+                    <div class="d-flex gap-2 flex-wrap align-items-center">
+                        <input type="text" class="form-control form-control-sm" placeholder="Search student name or ID..." id="riskSearch" onkeyup="loadAtRiskStudents(1)" style="width:200px;">
+                        
+                        <select class="form-select form-select-sm" id="riskLevelFilter" onchange="loadAtRiskStudents(1)" style="width:140px;">
+                            <option value="">All At-Risk</option>
+                            <option value="high">High Risk Only</option>
+                            <option value="moderate">Moderate Risk Only</option>
+                        </select>
+
+                        <select class="form-select form-select-sm" id="deptFilter" onchange="loadAtRiskStudents(1)" style="width:150px;">
+                            <option value="">All Departments</option>
+                            <option>Computer Science</option>
+                            <option>Information Technology</option>
+                            <option>Electronics</option>
+                            <option>Mechanical</option>
+                            <option>Civil</option>
+                            <option>Electrical Engineering</option>
+                        </select>
+
+                        <select class="form-select form-select-sm" id="sortFilter" onchange="loadAtRiskStudents(1)" style="width:150px;">
+                            <option value="score_asc">Score: Lowest First</option>
+                            <option value="score_desc">Score: Highest First</option>
+                            <option value="name">Student Name</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Student</th>
+                                <th>Department &amp; Sem</th>
+                                <th class="text-end">Predicted Score</th>
+                                <th>Risk Classification</th>
+                                <th>Primary Risk Factor</th>
+                                <th>Factor Snapshot</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="atRiskTableBody">
+                            <tr><td colspan="7" class="text-center text-muted py-4">Scanning student records...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="pagination" id="atRiskPagination"></div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Student Detail & Risk Modal -->
+    <div class="modal fade" id="studentDetailModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header border-bottom">
+                    <h5 class="modal-title"><i class="fas fa-user-graduate text-primary me-2"></i>Student Academic Diagnostic Profile</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="studentDetailModalBody">
+                    <div class="text-center py-4">Loading student profile...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="notifContainer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/at-risk.js"></script>
+</body>
+</html>

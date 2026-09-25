@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduPredict AI - Intelligent Student Performance & Early Risk Detection</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <style>
+        .hero-section {
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+            color: #FFFFFF;
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-glow {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.25) 0%, transparent 70%);
+            top: 10%;
+            right: 5%;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .workflow-step {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            text-align: center;
+            height: 100%;
+            transition: var(--transition);
+        }
+        .workflow-step:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary);
+        }
+        .workflow-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: var(--radius-pill);
+            background: var(--primary-50);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin: 0 auto 16px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3 border-bottom border-secondary border-opacity-25" style="background-color: #0F172A !important;">
+        <div class="container">
+            <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="#">
+                <div class="brand-icon" style="width:34px;height:34px;font-size:16px;"><i class="fas fa-graduation-cap"></i></div>
+                <span>EduPredict AI</span>
+            </a>
+            <div class="d-flex align-items-center gap-2">
+                <a href="dashboard.html" class="btn btn-outline-light btn-sm px-3">Dashboard</a>
+                <a href="prediction.html" class="btn btn-primary btn-sm px-3">Run Predictor</a>
+                <a href="login.html" class="btn btn-light btn-sm px-3 text-dark fw-semibold ms-1">Sign In</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Header -->
+    <header class="hero-section">
+        <div class="hero-glow"></div>
+        <div class="container py-5 position-relative z-1">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-7">
+                    <div class="mb-3">
+                        <span class="badge bg-primary text-white px-3 py-2 fs-6 rounded-pill">
+                            <i class="fas fa-brain me-2"></i>EdTech &amp; Machine Learning Intelligence
+                        </span>
+                    </div>
+                    <h1 class="display-4 fw-bolder text-white mb-3" style="letter-spacing: -1px; line-height: 1.15;">
+                        Intelligent Student Performance &amp; <span class="text-primary" style="color: #60A5FA !important;">Early Risk Detection</span>
+                    </h1>
+                    <p class="lead text-light opacity-75 mb-4 fs-5" style="max-width: 600px;">
+                        Transform academic oversight into proactive student success. Leverage Scikit-learn regressors to forecast overall performance, uncover primary risk deficits, and generate personalized, prioritized intervention action plans.
+                    </p>
+                    <div class="d-flex gap-3 flex-wrap mb-4">
+                        <a href="prediction.html" class="btn btn-primary btn-lg px-4 py-3 fw-bold shadow">
+                            <i class="fas fa-wand-magic-sparkles me-2"></i>Launch Performance Predictor
+                        </a>
+                        <a href="dashboard.html" class="btn btn-outline-light btn-lg px-4 py-3 fw-bold">
+                            <i class="fas fa-chart-pie me-2"></i>Explore Faculty Dashboard
+                        </a>
+                    </div>
+                    <div class="d-flex gap-4 text-white-50 small flex-wrap">
+                        <div><i class="fas fa-check text-success me-1"></i> Multi-factor Preprocessing</div>
+                        <div><i class="fas fa-check text-success me-1"></i> Transparent Risk Attribution</div>
+                        <div><i class="fas fa-check text-success me-1"></i> Dual-Model Validation (LR &amp; RF)</div>
+                    </div>
+                </div>
+
+                <div class="col-lg-5">
+                    <!-- Live Mocked Diagnostic Preview -->
+                    <div class="border border-secondary border-opacity-25 rounded-4 p-4 shadow-lg" style="background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px);">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div class="small text-white-50 text-uppercase fw-bold letter-spacing-1">Diagnostic Output Preview</div>
+                            <span class="badge bg-warning text-dark"><i class="fas fa-exclamation-triangle me-1"></i> Moderate Risk</span>
+                        </div>
+                        <div class="text-center py-3 border-bottom border-secondary border-opacity-25 mb-3">
+                            <div class="fs-1 fw-bolder text-white">72.4 <span class="fs-5 text-white-50 fw-normal">/ 100</span></div>
+                            <div class="text-info fw-semibold">Good Expected Performance</div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between small text-white-50 mb-1">
+                                <span>Attendance Deficit</span>
+                                <span class="text-danger fw-bold">58% vs 75% target</span>
+                            </div>
+                            <div class="progress" style="height: 6px; background: rgba(255,255,255,0.1);">
+                                <div class="progress-bar bg-danger" style="width: 58%;"></div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between small text-white-50 mb-1">
+                                <span>Assignment Completion</span>
+                                <span class="text-warning fw-bold">64% vs 70% target</span>
+                            </div>
+                            <div class="progress" style="height: 6px; background: rgba(255,255,255,0.1);">
+                                <div class="progress-bar bg-warning" style="width: 64%;"></div>
+                            </div>
+                        </div>
+                        <div class="p-2 rounded bg-dark text-start small border border-secondary border-opacity-25">
+                            <strong class="text-success"><i class="fas fa-bullseye me-1"></i> Primary Recommendation:</strong>
+                            <div class="text-white-50">Increase classroom attendance to reach 75% minimum threshold (+8 pts impact).</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Predict -> Understand -> Act Philosophy Section -->
+    <section class="py-5 bg-white">
+        <div class="container py-4">
+            <div class="text-center mb-5" style="max-width: 700px; margin: 0 auto;">
+                <span class="badge bg-primary-subtle text-primary border mb-2">Core UX Architecture</span>
+                <h2 class="fw-bold mb-3">Predict &rarr; Understand &rarr; Act</h2>
+                <p class="text-secondary">EduPredict AI guides educational institutions through a transparent three-phase lifecycle.</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="workflow-step">
+                        <div class="workflow-icon"><i class="fas fa-bolt"></i></div>
+                        <h5 class="fw-bold mb-2">1. Predict Performance</h5>
+                        <p class="text-secondary small mb-0">
+                            Machine learning evaluates continuous inputs (attendance, internals, assignment submission, weekly study time, previous performance) to calculate expected outcomes with high accuracy.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="workflow-step">
+                        <div class="workflow-icon" style="background:#FEF3C7; color:#B45309;"><i class="fas fa-magnifying-glass-chart"></i></div>
+                        <h5 class="fw-bold mb-2">2. Understand Risk Factors</h5>
+                        <p class="text-secondary small mb-0">
+                            The system attributes underlying risks based on the student's actual deficits against institutional benchmarks rather than black-box generic warnings.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="workflow-step">
+                        <div class="workflow-icon" style="background:#DCFCE7; color:#15803D;"><i class="fas fa-bullseye"></i></div>
+                        <h5 class="fw-bold mb-2">3. Act on Recommendations</h5>
+                        <p class="text-secondary small mb-0">
+                            Generates prioritized, tailored intervention action cards addressing the student's highest vulnerability areas first, showing expected performance improvements.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-4 border-top bg-light">
+        <div class="container d-flex justify-content-between align-items-center flex-wrap gap-2 text-muted small">
+            <div>&copy; 2026 EduPredict AI &bull; Intelligent Student Performance &amp; Early Risk Detection System</div>
+            <div class="d-flex gap-3">
+                <a href="dashboard.html" class="text-secondary">Dashboard</a>
+                <a href="prediction.html" class="text-secondary">Predict</a>
+                <a href="at-risk.html" class="text-secondary">At-Risk Radar</a>
+                <a href="reports.html" class="text-secondary">Reports</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

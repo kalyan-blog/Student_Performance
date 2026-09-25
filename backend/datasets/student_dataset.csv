@@ -1,0 +1,251 @@
+student_id,name,department,semester,age,gender,attendance,study_hours,assignment_score,internal_marks,previous_marks,final_score
+S001,Aarav Sharma,Mechanical,4,22,Female,89.7,22.6,78.4,80.0,70.4,81.5
+S002,Aditi Patel,Civil,3,18,Female,87.8,26.7,94.6,92.0,88.8,93.0
+S003,Rohan Mehta,Electronics,4,22,Male,65.6,10.3,48.7,45.7,58.4,51.5
+S004,Priya Nair,Civil,3,21,Male,91.1,21.5,84.0,82.3,90.7,87.8
+S005,Vikram Singh,Civil,2,21,Other,70.6,17.8,57.5,50.1,58.4,55.2
+S006,Ananya Rao,Information Technology,3,21,Male,59.1,14.5,46.4,45.5,56.3,52.0
+S007,Karthik Iyer,Electronics,7,22,Male,69.1,15.5,69.6,73.6,67.4,72.2
+S008,Sneha Joshi,Electronics,3,24,Female,69.7,19.8,64.3,62.4,55.4,65.2
+S009,Rahul Gupta,Electronics,4,21,Female,68.5,15.8,51.5,57.4,59.9,60.8
+S010,Neha Verma,Civil,8,23,Other,70.8,21.6,59.3,55.2,68.0,68.7
+S011,Siddharth Verma,Mechanical,7,22,Female,65.6,16.0,61.1,55.4,48.2,57.0
+S012,Pooja Reddy,Electronics,4,21,Male,88.2,26.6,82.3,92.2,84.9,87.6
+S013,Deepak Kumar,Electrical Engineering,1,23,Male,68.4,15.8,56.7,55.8,60.6,62.8
+S014,Divya Menon,Civil,1,24,Female,82.4,19.3,62.3,71.3,70.9,74.6
+S015,Arjun Das,Information Technology,8,20,Female,71.9,22.0,78.4,65.8,71.2,74.2
+S016,Tanvi Shah,Mechanical,8,24,Male,60.0,13.8,58.7,51.9,65.4,57.8
+S017,Gaurav Malhotra,Electrical Engineering,7,21,Female,71.7,15.8,67.5,55.6,74.2,65.8
+S018,Isha Deshmukh,Electrical Engineering,2,22,Male,84.0,23.6,73.7,67.9,68.8,71.2
+S019,Naveen Choudhury,Information Technology,8,19,Male,97.8,22.5,84.3,82.2,83.0,88.7
+S020,Meera Kulkarni,Mechanical,1,21,Male,79.8,21.5,75.3,69.0,60.3,74.1
+S021,Aditya Bhat,Civil,3,19,Male,49.7,17.7,55.7,47.1,43.3,47.4
+S022,Riya Sen,Computer Science,4,23,Male,70.2,20.6,61.5,55.8,50.3,62.6
+S023,Manish Pandey,Mechanical,1,20,Male,69.7,6.8,49.8,47.1,53.8,51.7
+S024,Shruti Pillai,Information Technology,1,18,Male,83.4,22.4,80.3,70.7,74.3,74.8
+S025,Kunal Tiwari,Electrical Engineering,2,24,Female,86.7,27.4,92.9,75.5,75.9,81.2
+S026,Swati Agarwal,Civil,7,20,Female,80.7,16.1,71.1,69.5,57.9,69.0
+S027,Varun Saxena,Mechanical,7,21,Female,79.0,25.6,87.7,72.6,72.5,78.5
+S028,Kavya Murthy,Computer Science,6,19,Other,87.0,26.1,79.5,71.0,78.1,84.8
+S029,Suresh Rathi,Computer Science,2,24,Male,90.5,24.0,94.6,81.8,91.5,91.9
+S030,Anjali Bose,Electronics,3,19,Male,86.0,27.5,88.2,73.1,80.2,84.7
+S031,Aarav Sharma 2,Electronics,7,22,Female,73.6,17.8,59.7,60.4,62.7,65.2
+S032,Aditi Patel 2,Information Technology,4,19,Male,74.7,24.3,70.9,73.8,71.7,78.5
+S033,Rohan Mehta 2,Mechanical,8,22,Other,71.8,12.0,62.2,54.1,66.7,63.0
+S034,Priya Nair 2,Mechanical,2,23,Male,68.6,18.6,61.1,64.6,57.9,65.1
+S035,Vikram Singh 2,Electrical Engineering,8,24,Other,71.0,12.2,57.7,65.8,57.9,58.8
+S036,Ananya Rao 2,Electrical Engineering,1,24,Male,64.7,12.2,61.9,60.6,63.1,68.6
+S037,Karthik Iyer 2,Electrical Engineering,4,18,Female,94.4,27.2,85.7,88.7,87.9,88.0
+S038,Sneha Joshi 2,Electronics,4,21,Female,100.0,31.6,97.0,83.2,82.0,91.7
+S039,Rahul Gupta 2,Mechanical,1,22,Other,62.2,16.2,58.9,61.0,58.4,56.4
+S040,Neha Verma 2,Mechanical,2,18,Male,63.3,17.4,65.3,53.6,63.7,62.9
+S041,Siddharth Verma 2,Computer Science,1,19,Female,75.0,18.6,69.2,61.3,62.2,66.8
+S042,Pooja Reddy 2,Electronics,8,19,Other,83.0,16.7,66.3,63.8,69.3,70.8
+S043,Deepak Kumar 2,Civil,6,18,Female,67.9,20.0,73.1,60.4,63.9,62.6
+S044,Divya Menon 2,Electronics,4,24,Female,68.1,21.0,73.5,66.0,61.2,71.2
+S045,Arjun Das 2,Civil,5,19,Female,71.7,18.3,70.7,66.9,68.2,67.3
+S046,Tanvi Shah 2,Computer Science,5,23,Male,73.9,23.9,75.2,70.3,62.4,72.0
+S047,Gaurav Malhotra 2,Information Technology,8,23,Female,47.3,10.1,36.0,29.4,30.4,37.1
+S048,Isha Deshmukh 2,Mechanical,3,18,Female,61.3,20.3,66.7,74.0,70.1,71.0
+S049,Naveen Choudhury 2,Computer Science,7,22,Female,91.5,28.4,81.4,86.5,88.6,90.3
+S050,Meera Kulkarni 2,Mechanical,1,22,Male,69.1,14.7,59.2,70.0,56.7,65.3
+S051,Aditya Bhat 2,Electrical Engineering,1,18,Male,70.0,24.2,65.6,68.5,69.8,72.4
+S052,Riya Sen 2,Information Technology,3,22,Female,89.3,21.3,69.0,79.7,80.3,78.8
+S053,Manish Pandey 2,Information Technology,3,24,Female,75.3,16.5,57.3,59.2,50.6,59.3
+S054,Shruti Pillai 2,Computer Science,8,24,Male,54.6,10.8,45.8,44.6,42.7,46.3
+S055,Kunal Tiwari 2,Information Technology,8,22,Female,74.9,13.9,61.7,65.5,64.7,62.7
+S056,Swati Agarwal 2,Civil,3,23,Male,69.4,19.2,65.1,61.7,65.9,68.6
+S057,Varun Saxena 2,Information Technology,4,22,Male,69.0,11.0,60.4,56.1,66.8,61.1
+S058,Kavya Murthy 2,Mechanical,8,24,Male,66.2,17.3,66.6,44.2,51.3,56.4
+S059,Suresh Rathi 2,Mechanical,6,20,Male,84.7,13.5,64.2,65.7,55.9,67.6
+S060,Anjali Bose 2,Mechanical,8,21,Female,87.5,28.7,85.2,78.3,83.8,85.8
+S061,Aarav Sharma 3,Mechanical,1,19,Male,74.9,22.7,75.3,63.1,69.8,71.3
+S062,Aditi Patel 3,Civil,8,20,Other,84.0,23.3,84.6,78.1,87.6,83.0
+S063,Rohan Mehta 3,Electronics,4,22,Other,67.1,12.5,46.0,41.7,48.4,49.7
+S064,Priya Nair 3,Electrical Engineering,3,23,Female,89.9,24.2,75.5,74.8,73.1,79.8
+S065,Vikram Singh 3,Computer Science,1,18,Female,77.2,19.1,60.1,58.1,57.5,61.4
+S066,Ananya Rao 3,Mechanical,8,22,Male,66.3,14.0,48.4,52.5,62.0,56.0
+S067,Karthik Iyer 3,Information Technology,4,23,Female,64.0,18.8,54.4,63.5,53.7,58.8
+S068,Sneha Joshi 3,Mechanical,6,21,Female,80.0,18.0,65.9,65.5,70.3,67.8
+S069,Rahul Gupta 3,Information Technology,8,22,Male,67.1,16.6,63.6,54.4,53.7,54.8
+S070,Neha Verma 3,Electrical Engineering,4,24,Female,86.2,20.0,71.1,76.7,75.1,76.4
+S071,Siddharth Verma 3,Electrical Engineering,6,18,Female,85.7,19.5,74.2,77.9,66.3,71.2
+S072,Pooja Reddy 3,Electrical Engineering,3,23,Female,77.3,22.8,79.5,78.1,79.4,78.7
+S073,Deepak Kumar 3,Information Technology,8,23,Female,66.9,14.7,51.3,45.0,53.8,51.6
+S074,Divya Menon 3,Mechanical,6,23,Female,62.8,16.0,52.5,48.5,60.9,58.7
+S075,Arjun Das 3,Electrical Engineering,1,21,Male,73.1,27.4,77.0,84.6,82.6,80.8
+S076,Tanvi Shah 3,Civil,3,22,Female,82.4,23.0,72.2,75.9,73.5,75.2
+S077,Gaurav Malhotra 3,Information Technology,1,21,Female,75.9,23.4,73.2,68.2,67.3,71.7
+S078,Isha Deshmukh 3,Information Technology,5,19,Male,79.9,32.6,80.9,71.1,77.6,80.5
+S079,Naveen Choudhury 3,Mechanical,2,19,Male,72.6,15.7,63.2,73.2,71.7,73.1
+S080,Meera Kulkarni 3,Information Technology,8,22,Male,79.3,20.2,81.2,60.6,64.6,67.7
+S081,Aditya Bhat 3,Information Technology,6,24,Female,82.6,26.5,71.0,69.5,64.8,73.3
+S082,Riya Sen 3,Electrical Engineering,2,21,Other,64.0,17.6,65.9,57.3,68.7,65.0
+S083,Manish Pandey 3,Mechanical,2,18,Male,81.7,25.1,76.1,69.0,73.4,78.8
+S084,Shruti Pillai 3,Electrical Engineering,6,23,Female,91.4,26.5,90.5,80.0,78.7,85.1
+S085,Kunal Tiwari 3,Electrical Engineering,3,23,Male,81.4,24.1,75.6,67.9,58.6,67.2
+S086,Swati Agarwal 3,Mechanical,8,22,Other,70.3,17.4,63.7,72.6,65.9,68.1
+S087,Varun Saxena 3,Computer Science,5,24,Female,71.2,22.8,63.2,63.2,67.0,71.5
+S088,Kavya Murthy 3,Electrical Engineering,1,19,Female,83.9,28.5,79.2,82.0,78.8,84.8
+S089,Suresh Rathi 3,Civil,4,19,Male,86.6,19.0,70.3,68.3,60.8,70.9
+S090,Anjali Bose 3,Civil,1,23,Male,78.0,24.5,78.6,66.9,81.9,75.1
+S091,Aarav Sharma 4,Information Technology,4,22,Male,75.4,13.9,65.8,63.2,68.8,63.3
+S092,Aditi Patel 4,Civil,1,21,Male,58.6,17.8,64.1,62.5,49.0,59.8
+S093,Rohan Mehta 4,Information Technology,6,19,Female,66.8,18.8,68.1,62.9,73.9,64.9
+S094,Priya Nair 4,Computer Science,5,21,Female,71.6,10.2,69.3,54.4,68.5,64.1
+S095,Vikram Singh 4,Mechanical,8,24,Other,44.6,11.2,34.7,45.2,44.3,40.6
+S096,Ananya Rao 4,Mechanical,4,19,Other,80.8,26.2,84.2,74.1,74.4,80.2
+S097,Karthik Iyer 4,Mechanical,8,19,Female,70.9,23.9,63.6,62.4,73.3,65.2
+S098,Sneha Joshi 4,Civil,8,20,Female,76.7,20.4,70.4,64.7,63.5,68.0
+S099,Rahul Gupta 4,Computer Science,8,19,Female,58.6,24.5,51.8,68.2,65.9,62.9
+S100,Neha Verma 4,Civil,7,18,Female,80.6,22.3,74.6,74.8,86.5,74.2
+S101,Siddharth Verma 4,Civil,3,22,Male,80.6,19.3,70.8,69.1,69.0,73.3
+S102,Pooja Reddy 4,Computer Science,1,22,Male,87.3,25.5,80.7,81.2,77.4,87.2
+S103,Deepak Kumar 4,Computer Science,8,21,Male,85.4,24.3,81.1,85.6,79.9,87.2
+S104,Divya Menon 4,Computer Science,1,24,Female,81.9,15.3,75.0,73.4,68.4,74.2
+S105,Arjun Das 4,Computer Science,8,19,Female,87.9,25.7,91.0,76.9,86.2,85.2
+S106,Tanvi Shah 4,Mechanical,4,18,Male,81.3,12.8,62.4,69.0,61.1,67.8
+S107,Gaurav Malhotra 4,Electronics,3,21,Female,64.7,19.6,59.1,66.4,61.4,67.7
+S108,Isha Deshmukh 4,Electronics,3,20,Female,70.6,14.3,69.5,65.6,56.0,64.2
+S109,Naveen Choudhury 4,Computer Science,6,21,Male,82.1,19.9,75.1,74.7,73.8,73.2
+S110,Meera Kulkarni 4,Electronics,7,21,Male,86.8,24.3,82.1,79.9,84.6,83.0
+S111,Aditya Bhat 4,Electronics,6,19,Female,65.4,22.7,79.4,63.3,60.3,73.1
+S112,Riya Sen 4,Computer Science,6,20,Female,64.6,15.6,54.6,55.4,59.4,58.1
+S113,Manish Pandey 4,Electronics,6,21,Female,88.2,26.7,84.5,82.8,76.4,76.4
+S114,Shruti Pillai 4,Civil,6,18,Female,83.1,19.7,70.6,76.7,67.3,70.6
+S115,Kunal Tiwari 4,Information Technology,6,18,Female,79.4,22.4,71.2,74.0,82.8,76.9
+S116,Swati Agarwal 4,Information Technology,5,22,Female,66.6,27.3,70.4,63.5,71.9,74.6
+S117,Varun Saxena 4,Computer Science,3,20,Female,72.0,18.6,61.5,65.7,55.8,63.5
+S118,Kavya Murthy 4,Mechanical,6,20,Female,66.0,16.8,65.3,64.0,67.1,68.3
+S119,Suresh Rathi 4,Computer Science,8,22,Male,87.2,22.2,81.5,77.9,86.7,82.0
+S120,Anjali Bose 4,Mechanical,3,21,Male,68.6,16.1,70.1,61.1,61.2,59.5
+S121,Aarav Sharma 5,Information Technology,3,20,Male,69.1,17.2,75.9,63.6,70.3,67.9
+S122,Aditi Patel 5,Computer Science,2,18,Female,71.1,21.4,63.3,70.9,71.8,72.0
+S123,Rohan Mehta 5,Electrical Engineering,5,18,Female,82.0,22.4,77.9,66.8,61.0,72.8
+S124,Priya Nair 5,Civil,6,19,Female,79.9,16.3,72.4,68.6,73.9,68.9
+S125,Vikram Singh 5,Electronics,1,20,Male,57.7,14.3,54.0,56.0,53.4,54.4
+S126,Ananya Rao 5,Mechanical,4,21,Male,62.2,19.9,59.5,61.7,68.9,71.6
+S127,Karthik Iyer 5,Electrical Engineering,7,22,Male,53.9,10.0,39.5,45.2,49.2,42.8
+S128,Sneha Joshi 5,Electronics,8,22,Male,91.1,21.0,83.9,76.8,73.7,82.0
+S129,Rahul Gupta 5,Electronics,1,21,Female,73.5,16.5,71.5,56.7,69.4,61.0
+S130,Neha Verma 5,Computer Science,5,24,Male,62.6,8.8,52.2,50.7,60.9,55.9
+S131,Siddharth Verma 5,Electronics,4,23,Male,77.0,23.0,68.6,71.0,68.6,70.7
+S132,Pooja Reddy 5,Civil,5,19,Female,50.5,11.3,46.6,40.8,44.7,45.8
+S133,Deepak Kumar 5,Electrical Engineering,8,22,Male,70.7,25.1,77.1,70.3,73.3,72.3
+S134,Divya Menon 5,Electronics,3,20,Female,73.6,26.7,73.3,79.5,79.0,80.7
+S135,Arjun Das 5,Computer Science,4,19,Female,78.6,23.7,57.7,69.5,73.5,69.8
+S136,Tanvi Shah 5,Civil,3,20,Male,89.7,24.7,86.7,87.4,83.9,86.1
+S137,Gaurav Malhotra 5,Information Technology,8,24,Female,57.8,10.6,35.8,43.7,46.0,45.8
+S138,Isha Deshmukh 5,Electrical Engineering,1,18,Female,83.8,21.8,78.2,72.4,73.8,76.0
+S139,Naveen Choudhury 5,Electronics,8,19,Female,69.7,15.7,56.0,61.8,61.9,62.9
+S140,Meera Kulkarni 5,Computer Science,1,22,Male,84.5,26.9,77.6,89.9,78.5,85.1
+S141,Aditya Bhat 5,Information Technology,4,19,Female,88.2,21.0,85.7,86.6,75.0,83.7
+S142,Riya Sen 5,Information Technology,4,19,Male,85.6,20.6,86.5,87.2,93.9,89.1
+S143,Manish Pandey 5,Mechanical,6,19,Male,60.5,13.7,56.2,54.9,53.1,54.7
+S144,Shruti Pillai 5,Civil,5,23,Male,66.5,13.6,57.1,53.3,51.1,53.1
+S145,Kunal Tiwari 5,Electronics,6,19,Other,59.9,21.3,57.1,58.2,53.0,58.3
+S146,Swati Agarwal 5,Computer Science,5,20,Male,89.0,18.2,81.0,74.6,58.8,76.9
+S147,Varun Saxena 5,Mechanical,6,18,Male,87.8,27.1,83.0,77.8,80.5,84.4
+S148,Kavya Murthy 5,Civil,3,24,Female,73.0,17.5,66.0,60.4,60.0,62.2
+S149,Suresh Rathi 5,Mechanical,4,21,Male,76.1,26.3,80.4,68.4,85.2,80.8
+S150,Anjali Bose 5,Electrical Engineering,1,19,Male,87.1,29.8,94.1,79.6,81.8,89.3
+S151,Aarav Sharma 6,Civil,5,22,Male,69.1,21.9,60.6,64.2,72.2,69.9
+S152,Aditi Patel 6,Civil,8,19,Male,55.7,7.4,46.4,50.0,56.5,47.3
+S153,Rohan Mehta 6,Electronics,5,22,Male,82.5,22.2,80.5,68.7,71.0,74.0
+S154,Priya Nair 6,Civil,1,20,Male,80.7,26.0,83.0,81.2,90.0,84.3
+S155,Vikram Singh 6,Mechanical,6,22,Female,78.7,20.0,72.2,69.9,67.2,71.1
+S156,Ananya Rao 6,Civil,5,21,Male,89.2,21.0,62.3,75.8,75.3,77.2
+S157,Karthik Iyer 6,Electronics,7,18,Male,72.2,19.6,75.1,65.7,75.4,73.0
+S158,Sneha Joshi 6,Electronics,3,22,Female,91.5,24.8,84.6,83.8,87.7,88.6
+S159,Rahul Gupta 6,Electrical Engineering,4,22,Male,92.4,21.7,88.9,81.4,89.1,90.4
+S160,Neha Verma 6,Mechanical,1,18,Female,87.4,18.7,71.7,64.4,73.6,74.4
+S161,Siddharth Verma 6,Information Technology,4,21,Male,66.0,24.1,53.9,62.1,52.0,61.6
+S162,Pooja Reddy 6,Information Technology,7,19,Male,64.2,15.8,53.9,51.3,62.2,54.7
+S163,Deepak Kumar 6,Civil,5,22,Male,78.6,19.1,73.0,86.5,86.8,79.9
+S164,Divya Menon 6,Electrical Engineering,5,18,Male,83.2,26.0,80.1,73.4,86.7,81.9
+S165,Arjun Das 6,Computer Science,8,20,Male,81.2,26.5,71.9,74.5,73.5,80.0
+S166,Tanvi Shah 6,Civil,7,18,Male,81.4,21.2,58.0,60.1,65.2,66.6
+S167,Gaurav Malhotra 6,Electrical Engineering,1,20,Male,79.7,18.6,62.1,56.8,62.6,62.9
+S168,Isha Deshmukh 6,Mechanical,8,21,Male,63.2,19.9,47.9,63.7,61.4,59.6
+S169,Naveen Choudhury 6,Mechanical,3,19,Male,64.8,22.7,64.8,67.9,63.8,67.9
+S170,Meera Kulkarni 6,Mechanical,8,18,Male,84.1,21.6,67.6,74.7,78.9,79.1
+S171,Aditya Bhat 6,Mechanical,2,24,Male,86.6,18.6,73.8,69.7,75.0,78.8
+S172,Riya Sen 6,Mechanical,1,24,Female,72.1,15.2,65.1,61.9,73.3,66.3
+S173,Manish Pandey 6,Electrical Engineering,2,23,Female,84.9,25.4,88.1,86.8,87.9,88.4
+S174,Shruti Pillai 6,Electrical Engineering,7,22,Male,74.1,24.0,68.0,65.4,69.5,68.3
+S175,Kunal Tiwari 6,Electronics,6,21,Female,60.6,16.7,65.3,59.9,67.8,68.6
+S176,Swati Agarwal 6,Information Technology,2,18,Female,60.4,13.1,48.0,49.6,55.0,49.0
+S177,Varun Saxena 6,Mechanical,3,24,Male,75.7,16.7,79.7,66.8,73.0,75.2
+S178,Kavya Murthy 6,Computer Science,8,22,Female,75.5,19.5,69.3,73.7,64.8,70.4
+S179,Suresh Rathi 6,Electrical Engineering,6,24,Female,91.0,18.5,81.8,86.8,72.1,80.0
+S180,Anjali Bose 6,Computer Science,8,18,Male,80.8,28.1,88.9,77.2,85.1,82.8
+S181,Aarav Sharma 7,Computer Science,2,20,Male,72.9,27.7,74.6,73.0,71.6,82.8
+S182,Aditi Patel 7,Computer Science,8,18,Female,73.2,21.2,67.1,61.3,59.6,66.7
+S183,Rohan Mehta 7,Electronics,7,23,Female,74.7,17.8,75.8,66.5,65.6,69.9
+S184,Priya Nair 7,Electrical Engineering,6,18,Male,61.8,17.0,45.5,38.0,46.3,50.4
+S185,Vikram Singh 7,Computer Science,7,18,Male,72.8,17.3,53.3,55.2,68.8,60.6
+S186,Ananya Rao 7,Mechanical,2,23,Male,77.8,17.6,73.9,71.1,70.5,72.4
+S187,Karthik Iyer 7,Civil,7,21,Male,68.6,14.3,66.3,66.7,53.4,62.8
+S188,Sneha Joshi 7,Computer Science,3,18,Female,63.0,15.2,52.1,53.6,60.1,55.8
+S189,Rahul Gupta 7,Electronics,2,23,Male,58.4,12.3,51.1,41.7,50.8,52.1
+S190,Neha Verma 7,Electrical Engineering,2,22,Male,60.4,10.4,48.4,50.4,43.6,48.4
+S191,Siddharth Verma 7,Electronics,2,20,Female,63.7,13.2,49.9,53.7,69.2,54.3
+S192,Pooja Reddy 7,Computer Science,1,20,Male,68.7,20.7,56.5,50.6,58.9,59.0
+S193,Deepak Kumar 7,Electrical Engineering,8,18,Male,79.8,18.8,66.1,61.5,73.3,70.1
+S194,Divya Menon 7,Civil,1,21,Female,85.9,21.3,78.2,73.9,80.3,77.1
+S195,Arjun Das 7,Computer Science,1,21,Female,80.4,22.1,63.3,55.8,71.1,66.0
+S196,Tanvi Shah 7,Electronics,3,22,Female,77.3,18.9,71.5,73.2,67.8,71.0
+S197,Gaurav Malhotra 7,Information Technology,6,18,Female,62.9,14.5,74.2,69.1,67.5,70.7
+S198,Isha Deshmukh 7,Mechanical,8,20,Male,71.0,21.3,62.1,53.9,62.2,62.1
+S199,Naveen Choudhury 7,Electronics,7,21,Male,81.7,27.6,71.4,73.3,64.6,79.3
+S200,Meera Kulkarni 7,Electrical Engineering,5,18,Female,69.8,12.4,53.3,52.5,60.2,55.4
+S201,Aditya Bhat 7,Computer Science,2,24,Male,90.2,23.5,82.8,77.6,72.1,81.6
+S202,Riya Sen 7,Mechanical,7,21,Male,82.4,18.4,74.8,73.4,69.1,72.9
+S203,Manish Pandey 7,Computer Science,2,23,Male,72.1,16.5,59.2,58.7,53.9,62.2
+S204,Shruti Pillai 7,Electrical Engineering,3,24,Male,76.3,19.6,68.6,65.9,75.1,68.8
+S205,Kunal Tiwari 7,Computer Science,2,21,Male,62.2,17.1,57.8,66.6,53.1,62.8
+S206,Swati Agarwal 7,Information Technology,1,20,Male,69.0,18.1,57.7,64.6,64.5,64.9
+S207,Varun Saxena 7,Mechanical,8,19,Male,79.4,16.0,69.7,71.5,72.9,70.3
+S208,Kavya Murthy 7,Mechanical,5,24,Male,79.7,19.2,65.5,73.3,72.2,72.4
+S209,Suresh Rathi 7,Electrical Engineering,4,22,Female,75.2,12.3,65.7,53.3,67.2,66.0
+S210,Anjali Bose 7,Information Technology,2,22,Female,87.0,25.5,93.7,89.9,88.6,91.5
+S211,Aarav Sharma 8,Electronics,7,20,Female,74.8,20.3,72.1,71.8,64.1,69.6
+S212,Aditi Patel 8,Computer Science,1,21,Female,66.4,15.4,53.3,44.8,64.3,53.3
+S213,Rohan Mehta 8,Civil,4,18,Male,70.5,20.1,60.4,63.9,64.1,67.2
+S214,Priya Nair 8,Computer Science,5,21,Male,66.8,20.3,70.1,61.4,62.2,66.6
+S215,Vikram Singh 8,Computer Science,4,20,Female,75.8,14.8,62.1,74.1,65.1,70.0
+S216,Ananya Rao 8,Electronics,1,22,Female,91.2,20.7,88.3,85.8,83.8,82.7
+S217,Karthik Iyer 8,Computer Science,8,21,Female,54.0,12.5,47.4,37.1,43.4,41.6
+S218,Sneha Joshi 8,Information Technology,8,22,Male,70.4,14.9,69.7,77.7,71.2,74.4
+S219,Rahul Gupta 8,Information Technology,6,24,Male,46.6,9.6,37.2,35.9,34.6,38.5
+S220,Neha Verma 8,Mechanical,8,18,Male,87.8,21.6,74.3,80.5,87.8,84.1
+S221,Siddharth Verma 8,Electrical Engineering,6,24,Male,72.2,22.8,65.9,60.3,67.9,65.8
+S222,Pooja Reddy 8,Civil,4,22,Female,76.3,20.6,72.1,58.7,66.3,65.8
+S223,Deepak Kumar 8,Computer Science,3,22,Female,84.5,22.1,71.8,74.8,72.3,78.9
+S224,Divya Menon 8,Computer Science,7,19,Male,57.5,15.6,46.4,46.9,52.9,54.0
+S225,Arjun Das 8,Electronics,7,19,Other,71.3,14.3,62.8,58.4,58.2,58.3
+S226,Tanvi Shah 8,Electrical Engineering,4,24,Female,81.3,20.3,80.0,77.4,76.2,75.4
+S227,Gaurav Malhotra 8,Information Technology,2,23,Male,81.2,15.8,69.1,62.4,74.4,69.4
+S228,Isha Deshmukh 8,Civil,2,24,Male,81.3,16.3,59.2,64.1,60.8,63.0
+S229,Naveen Choudhury 8,Mechanical,8,19,Male,76.9,24.2,76.4,79.3,80.2,78.3
+S230,Meera Kulkarni 8,Information Technology,7,22,Male,67.1,18.5,61.9,59.4,63.1,60.3
+S231,Aditya Bhat 8,Electrical Engineering,7,20,Male,67.3,19.2,63.4,48.8,59.0,58.7
+S232,Riya Sen 8,Mechanical,6,24,Male,59.5,8.1,48.4,46.7,50.0,45.5
+S233,Manish Pandey 8,Electronics,3,22,Male,85.8,19.4,81.6,76.4,75.5,76.0
+S234,Shruti Pillai 8,Electronics,1,20,Male,88.7,22.2,75.0,80.4,78.1,81.6
+S235,Kunal Tiwari 8,Computer Science,2,20,Female,62.7,15.9,56.1,56.9,49.1,56.2
+S236,Swati Agarwal 8,Electrical Engineering,7,19,Male,74.2,24.9,63.7,61.2,67.3,70.2
+S237,Varun Saxena 8,Civil,6,24,Female,67.9,16.8,57.4,63.7,51.5,56.2
+S238,Kavya Murthy 8,Mechanical,5,21,Male,74.7,21.6,60.4,70.8,70.0,70.7
+S239,Suresh Rathi 8,Information Technology,6,18,Other,71.1,19.1,54.5,53.0,60.1,65.3
+S240,Anjali Bose 8,Electrical Engineering,2,19,Male,72.7,21.3,65.6,56.5,67.1,65.3
+S241,Aarav Sharma 9,Electrical Engineering,2,19,Male,80.0,21.7,77.4,77.2,82.1,81.9
+S242,Aditi Patel 9,Electronics,6,21,Other,57.4,13.4,61.5,61.0,73.9,65.1
+S243,Rohan Mehta 9,Computer Science,1,18,Female,82.4,23.6,77.0,74.0,83.1,82.3
+S244,Priya Nair 9,Computer Science,4,22,Female,78.8,16.4,57.0,58.1,65.8,64.1
+S245,Vikram Singh 9,Mechanical,2,23,Male,70.1,13.4,59.9,69.7,73.2,68.5
+S246,Ananya Rao 9,Electronics,6,24,Male,53.0,16.7,57.1,53.1,69.4,61.1
+S247,Karthik Iyer 9,Electrical Engineering,7,23,Female,79.1,23.9,78.1,83.7,86.5,85.4
+S248,Sneha Joshi 9,Civil,6,22,Female,83.0,26.2,72.6,75.1,67.5,74.1
+S249,Rahul Gupta 9,Electronics,3,19,Female,80.7,19.9,75.2,72.4,62.7,68.2
+S250,Neha Verma 9,Mechanical,4,18,Female,69.7,20.6,64.9,68.3,64.6,64.4

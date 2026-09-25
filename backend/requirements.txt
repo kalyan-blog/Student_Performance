@@ -1,0 +1,13 @@
+flask
+flask-cors
+flask-session
+python-dotenv
+pandas
+numpy
+scikit-learn
+matplotlib
+seaborn
+joblib
+gunicorn
+bcrypt
+fpdf2

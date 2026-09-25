@@ -1,0 +1,28 @@
+{
+  "features": [
+    "attendance",
+    "internal_marks",
+    "assignment_score",
+    "previous_marks",
+    "study_hours"
+  ],
+  "target": "final_score",
+  "sample_count": 250,
+  "best_model": "Linear Regression",
+  "models": {
+    "Linear Regression": {
+      "mae": 2.01,
+      "rmse": 2.59,
+      "r2_score": 0.9317,
+      "accuracy": 93.17,
+      "file": "linear_regression.pkl"
+    },
+    "Random Forest": {
+      "mae": 2.24,
+      "rmse": 2.92,
+      "r2_score": 0.9133,
+      "accuracy": 91.33,
+      "file": "random_forest.pkl"
+    }
+  }
+}

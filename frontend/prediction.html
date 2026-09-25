@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict Performance - EduPredict AI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+    <div class="dashboard-wrapper">
+        <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+        
+        <!-- Application Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <a href="dashboard.html" class="brand-badge">
+                    <div class="brand-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <div class="brand-text">
+                        <h3>EduPredict AI</h3>
+                        <small>Intelligent Risk Detection</small>
+                    </div>
+                </a>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section-title">Academic Analytics</div>
+                <a href="dashboard.html" class="nav-item"><i class="fas fa-chart-pie"></i> Dashboard</a>
+                <a href="students.html" class="nav-item"><i class="fas fa-users"></i> Students</a>
+                <a href="add-students.html" class="nav-item"><i class="fas fa-user-plus"></i> Add Students</a>
+                <a href="prediction.html" class="nav-item active"><i class="fas fa-wand-magic-sparkles"></i> Predict Performance</a>
+                <a href="at-risk.html" class="nav-item"><i class="fas fa-triangle-exclamation"></i> At-Risk Students</a>
+                <a href="prediction.html#history-card" class="nav-item"><i class="fas fa-clock-rotate-left"></i> Prediction History</a>
+                <a href="analytics.html" class="nav-item"><i class="fas fa-chart-column"></i> Analytics</a>
+                <a href="reports.html" class="nav-item"><i class="fas fa-file-contract"></i> Reports & Export</a>
+                
+                <div class="nav-section-title mt-2">Configuration</div>
+                <a href="dashboard.html#models" class="nav-item"><i class="fas fa-brain"></i> ML Comparison</a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="d-flex align-items-center gap-2">
+                    <div class="user-avatar" id="sidebarAvatar">U</div>
+                    <div class="overflow-hidden">
+                        <div class="fw-semibold text-truncate small" id="sidebarName">User</div>
+                        <div class="small text-muted" id="sidebarRole">Faculty</div>
+                    </div>
+                    <button class="btn btn-sm text-danger ms-auto" onclick="logout()" title="Sign Out"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <div class="topbar">
+                <div class="topbar-left">
+                    <button class="mobile-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+                    <div>
+                        <h4>Predict Student Performance</h4>
+                        <div class="breadcrumb-sub">Predict → Understand → Act: Multi-factor ML analysis and early risk intervention</div>
+                    </div>
+                </div>
+                <div class="topbar-right">
+                    <div class="d-none d-md-flex align-items-center gap-2 px-3 py-1 bg-white border rounded-pill shadow-xs" id="topbarDbStatus">
+                        <span id="dbIndicatorDot" style="width:8px; height:8px; border-radius:50%; background:#16A34A; display:inline-block;"></span>
+                        <span id="dbStatusLabel" class="small fw-semibold text-secondary">Database: <strong class="text-success">Connected</strong></span>
+                    </div>
+                    <button class="btn-icon" onclick="toggleTheme()" title="Toggle Light/Dark Theme"><i class="fas fa-moon" id="themeIcon"></i></button>
+                    <a href="students.html" class="btn btn-outline-primary btn-sm"><i class="fas fa-user-plus me-1"></i> Student Directory</a>
+                    <div class="user-avatar" id="topbarAvatar">U</div>
+                </div>
+            </div>
+
+            <!-- Main Interactive Section: Form & Live Result -->
+            <div class="row g-4">
+                <!-- Prediction Form Column -->
+                <div class="col-xl-5 col-lg-6">
+                    <div class="surface-card">
+                        <div class="d-flex align-items-center justify-content-between mb-3 pb-2 border-bottom">
+                            <div>
+                                <h6 class="mb-1"><i class="fas fa-sliders me-2 text-primary"></i>Student Academic Profile</h6>
+                                <p class="text-muted small mb-0">Enter real student metrics for predictive assessment</p>
+                            </div>
+                            <span class="badge bg-primary-subtle text-primary border" id="activeModelTag">Model: Best Fit</span>
+                        </div>
+
+                        <form id="predictionForm" novalidate>
+                            <!-- Section 1: Student Information -->
+                            <div class="mb-3">
+                                <span class="nav-section-title px-0 d-block mb-2">1. Student Identification</span>
+                                <div class="row g-2">
+                                    <div class="col-sm-6">
+                                        <label class="form-label" for="predStudentId">Student ID <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="predStudentId" placeholder="e.g. S042" required>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="form-label" for="predStudentName">Student Full Name <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="predStudentName" placeholder="e.g. Sarah Jenkins" required>
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <label class="form-label" for="predDept">Department</label>
+                                        <select class="form-select" id="predDept">
+                                            <option>Computer Science</option>
+                                            <option>Information Technology</option>
+                                            <option>Electronics</option>
+                                            <option>Mechanical</option>
+                                            <option>Civil</option>
+                                            <option>Electrical Engineering</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <label class="form-label" for="predSem">Semester</label>
+                                        <select class="form-select" id="predSem">
+                                            <option value="1">Sem 1</option>
+                                            <option value="2">Sem 2</option>
+                                            <option value="3">Sem 3</option>
+                                            <option value="4" selected>Sem 4</option>
+                                            <option value="5">Sem 5</option>
+                                            <option value="6">Sem 6</option>
+                                            <option value="7">Sem 7</option>
+                                            <option value="8">Sem 8</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Section 2: Core Academic Parameters -->
+                            <div class="mb-3">
+                                <span class="nav-section-title px-0 d-block mb-2">2. Continuous Academic Parameters</span>
+                                <div class="row g-3">
+                                    <div class="col-sm-6">
+                                        <label class="form-label" for="predAttendance">
+                                            Attendance Percentage
+                                            <span class="text-muted fw-normal small">(Target: &ge; 75%)</span>
+                                        </label>
+                                        <div class="input-group">
+                                            <input type="number" class="form-control" id="predAttendance" min="0" max="100" step="0.1" value="78.5" placeholder="0-100" required>
+                                            <span class="input-group-text">%</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="form-label" for="predInternal">
+                                            Internal Marks
+                                            <span class="text-muted fw-normal small">(Target: &ge; 60)</span>
+                                        </label>
+                                        <div class="input-group">
+                                            <input type="number" class="form-control" id="predInternal" min="0" max="100" step="0.1" value="72.0" placeholder="0-100" required>
+                                            <span class="input-group-text">/ 100</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="form-label" for="predAssign">
+                                            Assignment Completion
+                                            <span class="text-muted fw-normal small">(Target: &ge; 70%)</span>
+                                        </label>
+                                        <div class="input-group">
+                                            <input type="number" class="form-control" id="predAssign" min="0" max="100" step="0.1" value="82.0" placeholder="0-100" required>
+                                            <span class="input-group-text">%</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="form-label" for="predPrevious">
+                                            Previous Semester / GPA
+                                            <span class="text-muted fw-normal small">(Target: &ge; 60%)</span>
+                                        </label>
+                                        <div class="input-group">
+                                            <input type="number" class="form-control" id="predPrevious" min="0" max="100" step="0.1" value="74.5" placeholder="0-100" required>
+                                            <span class="input-group-text">%</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="form-label" for="predStudy">
+                                            Study Hours / Week
+                                            <span class="text-muted fw-normal small">(Target: &ge; 10 hrs)</span>
+                                        </label>
+                                        <div class="input-group">
+                                            <input type="number" class="form-control" id="predStudy" min="0" max="80" step="0.5" value="12.0" placeholder="e.g. 14" required>
+                                            <span class="input-group-text">hrs/wk</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="form-label" for="predAlgo">Predictive Model</label>
+                                        <select class="form-select" id="predAlgo">
+                                            <option value="Random Forest Regressor">Random Forest (Ensemble)</option>
+                                            <option value="Linear Regression">Linear Regression (Baseline)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Preset Profiles for Instant Demo Testing -->
+                            <div class="p-2 mb-3 bg-light rounded border d-flex gap-2 align-items-center flex-wrap">
+                                <small class="fw-semibold text-secondary me-1"><i class="fas fa-wand-magic me-1"></i>Load Test Scenario:</small>
+                                <button type="button" class="btn btn-xs btn-outline-danger py-1 px-2" style="font-size:11px;" onclick="loadPreset('high_risk')">High Risk Student</button>
+                                <button type="button" class="btn btn-xs btn-outline-warning py-1 px-2" style="font-size:11px;" onclick="loadPreset('moderate_risk')">Moderate Risk Student</button>
+                                <button type="button" class="btn btn-xs btn-outline-success py-1 px-2" style="font-size:11px;" onclick="loadPreset('low_risk')">Low Risk (Honor)</button>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100 py-2 fs-6 shadow-sm" id="btnPredict">
+                                <i class="fas fa-bolt me-2"></i> Predict Performance & Detect Risks
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Prediction Results Column -->
+                <div class="col-xl-7 col-lg-6">
+                    <!-- Placeholder State before Prediction -->
+                    <div id="resultPlaceholder" class="surface-card text-center py-5">
+                        <div class="stat-icon icon-blue mx-auto mb-3" style="width: 60px; height: 60px; font-size: 24px;">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h5 class="fw-bold mb-2">Performance Intelligence Engine</h5>
+                        <p class="text-secondary small max-w-400 mx-auto mb-4">
+                            Fill in the student academic profile and click <strong>Predict Performance</strong> to generate the estimated score, risk classification, factor attribution, and personalized action plan.
+                        </p>
+                        <div class="d-flex justify-content-center gap-3 text-muted small">
+                            <span><i class="fas fa-check-circle text-success me-1"></i> ML Regressor</span>
+                            <span><i class="fas fa-check-circle text-success me-1"></i> Risk Attribution</span>
+                            <span><i class="fas fa-check-circle text-success me-1"></i> Action Plan</span>
+                        </div>
+                    </div>
+
+                    <!-- Active Result View (Revealed after Prediction) -->
+                    <div id="resultContainer" style="display:none;">
+                        <!-- 1. Hero Performance Score Card -->
+                        <div class="prediction-hero-card">
+                            <div class="hero-score-label">Predicted Overall Performance Score</div>
+                            <div class="hero-score-value">
+                                <span id="resScore">72.4</span> <span>/ 100</span>
+                            </div>
+                            <div class="hero-meta-pills">
+                                <span class="perf-badge" id="resPerfBadge">Good Performance</span>
+                                <span class="risk-badge" id="resRiskBadge"><i class="fas fa-exclamation-triangle"></i> Moderate Risk</span>
+                                <span class="grade-badge" id="resGradeBadge">Grade B+</span>
+                            </div>
+                            <div class="mt-3 text-white-50 small" id="resStudentSub">
+                                Student: <strong>Sarah Jenkins</strong> (ID: S042) &bull; Model: Random Forest Regressor
+                            </div>
+                        </div>
+
+                        <!-- 2. Academic Factors vs Benchmark Progress Bars -->
+                        <div class="surface-card mb-4">
+                            <div class="chart-header">
+                                <h6><i class="fas fa-chart-simple text-primary"></i>Academic Factors Benchmark Analysis</h6>
+                                <span class="small text-muted">Benchmark Target vs Student Actual</span>
+                            </div>
+                            <div id="factorBarsContainer">
+                                <!-- Populated dynamically by JS -->
+                            </div>
+                        </div>
+
+                        <!-- 3. Risk Factor Identification Card -->
+                        <div class="surface-card mb-4">
+                            <div class="chart-header">
+                                <h6><i class="fas fa-magnifying-glass-chart text-danger"></i>Key Academic Risk Factors</h6>
+                                <span class="badge bg-danger-subtle text-danger border" id="riskCountTag">0 Factors Detected</span>
+                            </div>
+                            <div id="riskFactorsContainer">
+                                <!-- Populated dynamically with actual student values -->
+                            </div>
+                        </div>
+
+                        <!-- 4. Personalized Recommendation Engine Action Plan -->
+                        <div class="surface-card mb-4">
+                            <div class="chart-header">
+                                <h6><i class="fas fa-bullseye text-success"></i>Personalized Intervention Action Plan</h6>
+                                <span class="badge bg-success-subtle text-success border">Prioritized Interventions</span>
+                            </div>
+                            <div id="recommendationsContainer">
+                                <!-- Populated dynamically -->
+                            </div>
+                        </div>
+
+                        <!-- Quick Export / Navigate Actions -->
+                        <div class="d-flex gap-2 flex-wrap mb-4">
+                            <button class="btn btn-outline-primary btn-sm" onclick="window.print()"><i class="fas fa-print me-1"></i> Print / Save PDF</button>
+                            <a href="at-risk.html" class="btn btn-outline-danger btn-sm"><i class="fas fa-triangle-exclamation me-1"></i> View At-Risk Cohort</a>
+                            <button class="btn btn-secondary btn-sm" onclick="resetForm()"><i class="fas fa-rotate me-1"></i> Evaluate Another Student</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Historical Predictions Section -->
+            <div class="table-container mt-4">
+                <div class="table-header">
+                    <div>
+                        <h5 class="mb-1"><i class="fas fa-clock-rotate-left me-2 text-primary"></i>Prediction History</h5>
+                        <small class="text-muted">Review, filter, and audit past academic performance predictions</small>
+                    </div>
+                    <div class="d-flex gap-2 flex-wrap align-items-center">
+                        <input type="text" class="form-control form-control-sm" placeholder="Search student or ID..." id="predHistSearch" onkeyup="loadPredictionHistory(1)" style="width:180px;">
+                        <select class="form-select form-select-sm" id="filterDepartment" onchange="loadPredictionHistory(1)" style="width:150px;">
+                            <option value="">All Departments</option>
+                            <option>Computer Science</option>
+                            <option>Information Technology</option>
+                            <option>Electronics</option>
+                            <option>Mechanical</option>
+                            <option>Civil</option>
+                            <option>Electrical Engineering</option>
+                        </select>
+                        <select class="form-select form-select-sm" id="filterRisk" onchange="loadPredictionHistory(1)" style="width:140px;">
+                            <option value="">All Risk Levels</option>
+                            <option value="High Risk">High Risk</option>
+                            <option value="Moderate Risk">Moderate Risk</option>
+                            <option value="Low Risk">Low Risk</option>
+                        </select>
+                        <select class="form-select form-select-sm" id="filterPerformance" onchange="loadPredictionHistory(1)" style="width:130px;">
+                            <option value="">All Levels</option>
+                            <option>Excellent</option>
+                            <option>Good</option>
+                            <option>Average</option>
+                            <option>Poor</option>
+                        </select>
+                        <button class="btn btn-outline-primary btn-sm" onclick="exportPredictions()"><i class="fas fa-file-export me-1"></i> Export CSV</button>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Student</th>
+                                <th>Department</th>
+                                <th>Attendance</th>
+                                <th>Internals</th>
+                                <th>Study Hrs</th>
+                                <th>Predicted Score</th>
+                                <th>Academic Risk</th>
+                                <th>Performance</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="predHistoryBody">
+                            <tr><td colspan="9" class="text-center text-muted py-4">Loading prediction records...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pagination" id="predPagination"></div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Prediction Detail Inspection Modal -->
+    <div class="modal fade" id="predDetailModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header border-bottom">
+                    <h5 class="modal-title"><i class="fas fa-clipboard-user me-2 text-primary"></i>Comprehensive Student Prediction Analysis</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="predDetailBody">
+                    <div class="text-center py-4 text-muted">Loading prediction details...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notifications Container -->
+    <div class="toast-container" id="notifContainer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/prediction.js"></script>
+</body>
+</html>
